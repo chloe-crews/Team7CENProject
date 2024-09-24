@@ -15,14 +15,26 @@ Please delete options that are not relevant.
 
 ## Checklist
 
-- [ ] My code follows the style guidelines of this project.
-- [ ] I have performed a self-review of my own code.
+- [ ] My code references the correct Jira issue in the title and commit message.
+  - PR title format: `WNS-<issue-number>: <short description of change>`
+  - Example: `WNS-5: Add payment gateway integration`
+- [ ] I have followed the branch naming conventions.
+  - Branch name format: `feature/<your-name>/WNS-<issue-number>/<short-description>` or `bugfix/<your-name>/WNS-<issue-number>/<short-description>`
+- [ ] I have performed a self-review of my code.
 - [ ] I have commented my code, particularly in hard-to-understand areas.
-- [ ] I have made corresponding changes to the documentation.
 - [ ] My changes generate no new warnings.
 - [ ] I have added tests that prove my fix is effective or that my feature works.
-- [ ] New and existing unit tests pass locally with my changes.
-- [ ] Any dependent changes have been merged and published in downstream modules.
+- [ ] All new and existing unit tests pass locally with my changes.
+
+## Jira Issue
+
+This pull request resolves issue: `[WNS-<issue-number>]`
+
+### Description
+
+Please include a summary of the change and which issue is fixed. Include any relevant context or background information.
+
+Fixes #[issue-number]
 
 ## Related PRs
 

@@ -78,17 +78,20 @@ pytest tests
 ## Branch Naming Conventions
 To maintain consistency and ensure a smooth development process, please follow these branch naming conventions:
 
-- **Feature Branches**: For new features, create branches named <your-name>/feature/<description>. Example:
+- **Feature Branches**: For new features, create branches named feature/<your-name>/WNS-<issue-number>/<short-description>
+Example:
 ```bash
-git checkout -b chloe-crews/feature/user-authentication
+git checkout -b feature/chloe-crews/WNS-5/payment-gateway
 ```
-- **Bug Fix Branches**: For bug fixes, use bugfix/<description>. Example:
+- **Bug Fix Branches**: For bug fixes, use bugfix/<your-name>/WNS-<issue-number>/<short-description>
+Example:
 ```bash
-git checkout -b chloe-crews/bugfix/fix-login-issue
+git checkout -b bugfix/chloe-crews/WNS-12/fix-bug
 ```
-- **Hotfix Branches**: For critical fixes, use hotfix/<description>. Example:
+- **Hotfix Branches**: For critical fixes, use hotfix/<your-name>/WNS-<issue-number>/<short-description>
+Example:
 ```bash
-git checkout -b chloe-crews/hotfix/critical-deployment-fix
+git checkout -b hotfix/chloe-crews/WNS-15/critical-fix
 ```
 - **Naming Guidelines**:
     - Use lowercase letters.
@@ -111,15 +114,17 @@ When making changes to the repository, it is important to use clear and descript
     - Example: "Fix login issue when using Facebook authentication"
 
 
-### Commit Guidelines:
-- **Use the imperative mood**: Write the summary as if you’re commanding the code to make the change. For example: "Add new payment method", "Fix typo in README".
-- **Keep it concise**: The summary should be brief and to the point.
-- **Explain why when necessary**: If the reason for the change is not obvious, explain why the change was made in the longer description.
-- **Reference issues if applicable**: If the commit fixes a specific issue, reference it in the message. Example: "Fixes #123".
+### Commit Message Guidelines:
+
+- Each commit message **must** reference a Jira issue using the format: `ISSUE-KEY: Commit description`.
+  - Example: `WNS-1: Implement rental feature for user dashboard`
+- Use the correct **Jira issue key** from your project. In our case, the issue key is prefixed with `WNS`, followed by the issue number.
+- Keep the commit message concise but descriptive.
 
 ### Example Commit Message:
 ```bash
-git commit -m "Add validation to rental form to prevent empty submissions"
+git commit -m "WNS-5: Add payment gateway integration"
+git commit -m "WNS-12: Fix bug in rental checkout flow"
 ```
 
 ---
