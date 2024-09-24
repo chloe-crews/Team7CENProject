@@ -24,8 +24,9 @@ This project is structured to run automated tests (both unit and integration) us
 ---
 
 ## Project Structure
-
+```markdown
 Team7CENProject/ ├── tests/ # Directory containing all test files │ ├── unit/ # Directory for unit test files │ │ └── test_basic.py # Example of a basic unit test file │ └── integration/ # Directory for integration test files │ └── test_integration.py # Example of a basic integration test file ├── .github/ # Directory containing GitHub-specific files │ └── workflows/ # Directory for GitHub Actions workflow files │ └── status_checks.yml # The GitHub Actions workflow configuration file ├── requirements.txt # File that lists Python dependencies for the project ├── README.md # Project documentation (the README file you're creating now) └── <source code files> # Placeholder for where your main application code will be
+```
 
 ---
 
