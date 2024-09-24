@@ -1,7 +1,18 @@
 # Team7CENProject
 
 ## Overview
+**Wear & Share** is a peer-to-peer marketplace connecting individuals who are looking to rent costumes, unique outfits, or formal attire with those who own them. The platform allows users to list their outfits for short-term rental, providing a cost-effective and sustainable solution for people attending themed parties or special events.
 This project is structured to run automated tests (both unit and integration) using **GitHub Actions**. It includes security checks, dependency management, and Python code testing to ensure the stability and security of the application.
+
+### Team Members
+- Chloe Crews, Nikhil Anantha, Gabriel De Brito, and Arwen Dowers
+
+### Project Vision
+- **For**: Individuals who need to attend themed parties or special events.
+- **Who**: Do not want to spend an excessive amount of money on an outfit they will only wear once or twice.
+- **The product is**: A web-based marketplace that allows users to rent outfits.
+- **Unlike**: Traditional retail stores or online marketplaces that only sell outfits and costumes.
+- **Our product**: Offers a peer-to-peer platform that facilitates short-term rentals, promoting sustainability and cost-effectiveness.
 
 ### Features
 - **Unit Testing**: Automated testing of individual components of the application.
@@ -89,6 +100,28 @@ git checkout -b chloe-crews/hotfix/critical-deployment-fix
 
 ---
 
+## Commit Messages
+When making changes to the repository, it is important to use clear and descriptive commit messages. A good commit message helps others (and your future self) understand what changes were made and why. Follow these guidelines when writing a commit message:
+
+### Structure of a Commit Message:
+- Short summary (50 characters or less):
+    - Summarize the change in a few words.
+    - Example: "Fix login issue when using Facebook authentication"
+
+
+### Commit Guidelines:
+- **Use the imperative mood**: Write the summary as if you’re commanding the code to make the change. For example: "Add new payment method", "Fix typo in README".
+- **Keep it concise**: The summary should be brief and to the point.
+- **Explain why when necessary**: If the reason for the change is not obvious, explain why the change was made in the longer description.
+- **Reference issues if applicable**: If the commit fixes a specific issue, reference it in the message. Example: "Fixes #123".
+
+### Example Commit Message:
+```bash
+git commit -m "Add validation to rental form to prevent empty submissions"
+```
+
+---
+
 ## Running the Tests
 
 ### Unit Tests
@@ -115,8 +148,8 @@ pytest tests/integration
 1. Create a new test file in the tests/unit/ directory. Name it something descriptive, following the naming convention: test_<name>.py.
 2. Write your test functions inside this file. Each test function MUST start with test_ to be detected by pytest.
 Example of a basic unit test:
-# tests/unit/test_example.py
 ```python
+# tests/unit/test_example.py
 def test_addition():
     assert 1 + 1 == 2
 
@@ -132,8 +165,8 @@ pytest tests/unit
 1. Create a new test file in the tests/integration/ directory. Name it something descriptive, following the naming convention test_<name>.py.
 2. Write your test functions to check the interaction between components.
 Example of a basic integration test:
+```python
 # tests/integration/test_example_integration.py
-```bash
 def test_integration_example():
     result = "Hello" + " World"
     assert result == "Hello World"
