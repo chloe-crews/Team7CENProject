@@ -36,8 +36,8 @@ Team7CENProject/
 │   └── workflows/             # Directory for GitHub Actions workflow files
 │       └── status_checks.yml  # The GitHub Actions workflow configuration file
 ├── requirements.txt           # File that lists Python dependencies for the project
-├── README.md                  # Project documentation (the README file you're creating now)
-└── <source code files>        # Placeholder for where your main application code will be
+├── README.md                  # Project documentation 
+└── <source code files>        # Placeholder for main application code 
 ```
 
 ---
