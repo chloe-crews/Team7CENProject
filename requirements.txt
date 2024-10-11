@@ -2,3 +2,4 @@ pytest
 mypy
 bandit
 pip-audit
+django==5.1.2
