@@ -73,6 +73,12 @@ pip install -r requirements.txt
 pytest tests
 ```
 
+### 5. Run the App
+```bash
+python manage.py runserver
+```
+Then, go to http://127.0.0.1:8000/ in your web browser.
+
 ---
 
 ## Branch Naming Conventions
