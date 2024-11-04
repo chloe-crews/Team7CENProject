@@ -6,11 +6,10 @@ from rest_framework.views import APIView
 from .serializers import CustomUserSerializer
 from .models import CustomUser
 
-
 def home(request):
+
     return render(request, 'accounts/dashboard.html')
     # return HttpResponse('<h1>Welcome to Wear & Share!</h1>')
-
 
 class CreateUserView(APIView):
     def post(self, request):
