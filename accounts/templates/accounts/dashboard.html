@@ -477,46 +477,49 @@
             </button>
           </header>
         </div>
-        <div class="login-form">
-          <div class="input-fields">
-            <div class="email-address">Email address</div>
-            <div class="inputs">
-              <div class="rectangle-group">
-                <div class="frame-item"></div>
-                <input
-                  class="enter-your-email"
-                  placeholder="Enter your email"
-                  type="text"
-                />
+        <form action="" method="POST">{% csrf_token %}
+          <div class="login-form">
+            <div class="input-fields">
+              <div class="email-address">Email address</div>
+              <div class="inputs">
+                <div class="rectangle-group">
+                  <div class="frame-item"></div>
+                  <input
+                    class="enter-your-email"
+                    placeholder="Enter your email"
+                    type="text"
+                    name="email"
+                  />
+                </div>
               </div>
             </div>
-          </div>
-          <div class="input-fields1">
-            <div class="password">Password</div>
-            <div class="input-fields-inner">
-              <div class="rectangle-container">
-                <div class="frame-inner"></div>
-                <input
-                  class="enter-your-password"
-                  placeholder="Enter your password"
-                  type="text"
-                />
+            <div class="input-fields1">
+              <div class="password">Password</div>
+              <div class="input-fields-inner">
+                <div class="rectangle-container">
+                  <div class="frame-inner"></div>
+                  <input
+                    class="enter-your-password"
+                    placeholder="Enter your password"
+                    type="text"
+                  />
+                </div>
               </div>
             </div>
+            <div class="forgot-password">
+              <div class="forgot-password1">Forgot password?</div>
+            </div>
           </div>
-          <div class="forgot-password">
-            <div class="forgot-password1">Forgot password?</div>
+          <div class="frame-parent">
+            <button class="group-button">
+              <div class="rectangle-div"></div>
+              <div class="log-in">Log in</div>
+            </button>
+            <div class="login-button-icon">
+              <div class="login-button-icon-child"></div>
+            </div>
           </div>
-        </div>
-        <div class="frame-parent">
-          <button class="group-button">
-            <div class="rectangle-div"></div>
-            <div class="log-in">Log in</div>
-          </button>
-          <div class="login-button-icon">
-            <div class="login-button-icon-child"></div>
-          </div>
-        </div>
+        </form>
       </section>
     </div>
   </body>
