@@ -7,9 +7,11 @@ from .serializers import CustomUserSerializer
 from .models import CustomUser
 
 def home(request):
-
     return render(request, 'accounts/dashboard.html')
     # return HttpResponse('<h1>Welcome to Wear & Share!</h1>')
+
+def signup(request):
+    return render(request, 'accounts/signup.html')
 
 class CreateUserView(APIView):
     def post(self, request):
