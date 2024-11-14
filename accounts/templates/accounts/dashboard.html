@@ -2,18 +2,25 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- Meta tags for character encoding and viewport settings -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Page title for the login form -->
     <title>Log in to Wear and Share</title>
+    
+    <!-- Google Fonts link for Nunito font -->
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600&display=swap"
     />
+    
+    <!-- Inline CSS styles for page layout and design -->
     <style>
-      /* General Styles */
+      /* Styles for the entire page */
       body {
-        font-family: 'Nunito', sans-serif;
-        background: linear-gradient(135deg, #b3c6ff, #f3e6ff);
+        font-family: 'Nunito', sans-serif; /* Apply Nunito font */
+        background: linear-gradient(135deg, #b3c6ff, #f3e6ff); /* Gradient background */
         margin: 0;
         display: flex;
         align-items: center;
@@ -21,51 +28,69 @@
         min-height: 100vh;
         color: #333;
       }
+      
+      /* Container for the login form */
       .login-container {
-        background: #fff;
+        background: #fff; /* White background */
         padding: 40px;
         width: 90%;
-        max-width: 400px;
-        border-radius: 12px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        max-width: 400px; /* Max width for responsiveness */
+        border-radius: 12px; /* Rounded corners */
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow */
         text-align: center;
       }
+      
+      /* Style for the main heading */
       .login-container h1 {
         font-size: 26px;
         font-weight: 600;
         color: #4a4a4a;
         margin-bottom: 20px;
       }
+      
+      /* Style for the paragraph text */
       .login-container p {
         font-size: 16px;
         color: #6a6a6a;
         margin-bottom: 30px;
       }
+      
+      /* Style for the sign-up link inside the paragraph */
       .login-container p a {
         color: #5c6bc0;
         text-decoration: none;
         font-weight: 600;
       }
+      
+      /* Hover effect for the sign-up link */
       .login-container p a:hover {
         text-decoration: underline;
       }
+      
+      /* Common styles for input fields, buttons, and Google button */
       .login-container input,
       .login-container button,
       .login-container .google-btn {
         width: 100%; /* Ensures all elements are the same width */
         box-sizing: border-box;
       }
+      
+      /* Style for the input fields */
       .login-container input {
         padding: 12px;
         margin: 10px 0;
-        border: 1px solid #ccc;
+        border: 1px solid #ccc; /* Light gray border */
         border-radius: 8px;
         font-size: 16px;
         color: #333;
       }
+      
+      /* Placeholder color in input fields */
       .login-container input::placeholder {
         color: #bbb;
       }
+      
+      /* Container for buttons with spacing and alignment */
       .button-container {
         display: flex;
         flex-direction: column;
@@ -73,59 +98,90 @@
         gap: 10px;
         width: 100%; /* Makes the container take up full width */
       }
+      
+      /* Style for the main login button */
       .login-container button,
       .login-container .google-btn {
         width: 100%; /* Makes buttons take full width of the container */
         max-width: 350px; /* Optional, can limit button width if needed */
         padding: 14px;
-        background-color: #5c6bc0;
-        color: #fff;
+        background-color: #5c6bc0; /* Primary button color */
+        color: #fff; /* White text color */
         border: none;
         border-radius: 8px;
         font-size: 18px;
         font-weight: 600;
         cursor: pointer;
-        transition: background 0.3s ease;
+        transition: background 0.3s ease; /* Smooth background transition */
         text-align: center;
       }
+      
+      /* Hover effect for the main login button */
       .login-container button:hover {
         background-color: #3f51b5;
       }
+      
+      /* Style for the Google login button */
       .login-container .google-btn {
-        background-color: #4285f4;
+        background-color: #4285f4; /* Google blue color */
         text-decoration: none;
       }
+      
+      /* Hover effect for the Google login button */
       .login-container .google-btn:hover {
         background-color: #357ae8;
       }
+      
+      /* Style for the "Forgot password" link */
       .forgot-password {
         margin-top: 20px;
         font-size: 14px;
       }
+      
+      /* Style for the "Forgot password" link text */
       .forgot-password a {
         color: #5c6bc0;
         text-decoration: none;
         font-weight: 600;
       }
+      
+      /* Hover effect for the "Forgot password" link */
       .forgot-password a:hover {
         text-decoration: underline;
       }
     </style>
   </head>
+  
   <body>
+    <!-- Main container for the login form -->
     <div class="login-container">
+      
+      <!-- Page title inside the form container -->
       <h1>Log in to Wear and Share</h1>
+      
+      <!-- Sign-up link for users who don't have an account -->
       <p>Don't have an account? <a href="{% url 'signup' %}">Sign up</a></p>
+      
+      <!-- Login form -->
       <form action="" method="POST">
         {% csrf_token %}
+        
+        <!-- Email input field -->
         <input type="email" name="email" placeholder="Enter your email" required />
+        
+        <!-- Password input field -->
         <input type="password" name="password" placeholder="Enter your password" required />
         
+        <!-- Container for login buttons -->
         <div class="button-container">
+          <!-- Main login button -->
           <button type="submit">Log in</button>
+          
+          <!-- Google login button, links to Google OAuth login -->
           <a href="{% provider_login_url 'google' %}" class="google-btn">Log in with Google</a>
         </div>
         
+        <!-- Forgot password link -->
         <div class="forgot-password">
           <a href="#">Forgot password?</a>
         </div>

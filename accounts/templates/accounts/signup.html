@@ -1,18 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- Meta tags for character encoding and viewport settings -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Page title for the sign-up form -->
     <title>Sign Up for Wear and Share</title>
+    
+    <!-- Google Fonts link for Nunito font -->
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600&display=swap"
     />
+    
+    <!-- Inline CSS styles for page layout and design -->
     <style>
-      /* General Styles */
+      /* Styles for the entire page */
       body {
-        font-family: 'Nunito', sans-serif;
-        background: linear-gradient(135deg, #b3c6ff, #f3e6ff);
+        font-family: 'Nunito', sans-serif; /* Apply Nunito font */
+        background: linear-gradient(135deg, #b3c6ff, #f3e6ff); /* Gradient background */
         margin: 0;
         display: flex;
         align-items: center;
@@ -20,64 +27,86 @@
         min-height: 100vh;
         color: #333;
       }
+      
+      /* Container for the sign-up form */
       .signup-container {
-        background: #fff;
+        background: #fff; /* White background */
         padding: 40px;
         width: 90%;
-        max-width: 400px;
-        border-radius: 12px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        max-width: 400px; /* Max width for responsiveness */
+        border-radius: 12px; /* Rounded corners */
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow */
         text-align: center;
       }
+      
+      /* Style for the main heading */
       .signup-container h1 {
         font-size: 26px;
         font-weight: 600;
         color: #4a4a4a;
         margin-bottom: 20px;
       }
+      
+      /* Style for the paragraph text */
       .signup-container p {
         font-size: 16px;
         color: #6a6a6a;
         margin-bottom: 30px;
       }
+      
+      /* Style for the log-in link inside the paragraph */
       .signup-container p a {
         color: #5c6bc0;
         text-decoration: none;
         font-weight: 600;
       }
+      
+      /* Hover effect for the log-in link */
       .signup-container p a:hover {
         text-decoration: underline;
       }
+      
+      /* Common styles for input fields and button */
       .signup-container input,
       .signup-container button {
-        width: 100%;
-        box-sizing: border-box;
+        width: 100%; /* Full width */
+        box-sizing: border-box; /* Include padding and border in width */
       }
+      
+      /* Style for the input fields */
       .signup-container input {
         padding: 12px;
         margin: 10px 0;
-        border: 1px solid #ccc;
+        border: 1px solid #ccc; /* Light gray border */
         border-radius: 8px;
         font-size: 16px;
         color: #333;
       }
+      
+      /* Placeholder color in input fields */
       .signup-container input::placeholder {
         color: #bbb;
       }
+      
+      /* Style for the sign-up button */
       .signup-container button {
         padding: 14px;
-        background-color: #5c6bc0;
-        color: #fff;
+        background-color: #5c6bc0; /* Primary button color */
+        color: #fff; /* White text color */
         border: none;
         border-radius: 8px;
         font-size: 18px;
         font-weight: 600;
         cursor: pointer;
-        transition: background 0.3s ease;
+        transition: background 0.3s ease; /* Smooth background transition */
       }
+      
+      /* Hover effect for the sign-up button */
       .signup-container button:hover {
-        background-color: #3f51b5;
+        background-color: #3f51b5; /* Darker shade on hover */
       }
+      
+      /* Style for the log-in link below the form */
       .login-link {
         margin-top: 20px;
         display: inline-block;
@@ -86,20 +115,37 @@
         font-size: 14px;
         font-weight: 600;
       }
+      
+      /* Hover effect for the log-in link */
       .login-link:hover {
         text-decoration: underline;
       }
     </style>
   </head>
+  
   <body>
+    <!-- Main container for the sign-up form -->
     <div class="signup-container">
+      <!-- Page title inside the form container -->
       <h1>Sign up for Wear and Share</h1>
+      
+      <!-- Log-in link for users who already have an account -->
       <p>Already have an account? <a href="{% url 'dashboard' %}" class="login-link">Log in</a></p>
+      
+      <!-- Sign-up form -->
       <form action="" method="POST">
         {% csrf_token %}
+        
+        <!-- Email input field -->
         <input type="email" name="email" placeholder="Enter your email" required />
+        
+        <!-- Username input field -->
         <input type="text" name="username" placeholder="Create a username" required />
+        
+        <!-- Password input field -->
         <input type="password" name="password" placeholder="Create a password" required />
+        
+        <!-- Submit button for the sign-up form -->
         <button type="submit">Sign Up</button>
       </form>
     </div>
