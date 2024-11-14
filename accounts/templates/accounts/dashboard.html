@@ -1,548 +1,135 @@
 {% load socialaccount %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="initial-scale=1, width=device-width" />
-
-    <!-- <link rel="stylesheet" href="static/css/global.css" />
-    <link rel="stylesheet" href="static/css/index.css" /> -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Log in to Wear and Share</title>
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600&display=swap"
     />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap"
-    />
-
     <style>
-      .login-page-hifi-child {
-    margin-top: -399px;
-    margin-left: -1386px;
-    height: 660px;
-    position: relative;
-    filter: blur(300px);
-    border-radius: 50%;
-    background-color: #7974ff;
-    transform: rotate(-180deg);
-    min-width: 1154px;
-    flex-shrink: 0;
-    max-width: 100%;
-  }
-  .log-in-to {
-    position: relative;
-    font-weight: 600;
-  }
-  .login-title {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    padding: 30px 0 0;
-    box-sizing: border-box;
-    max-width: 100%;
-  }
-  .frame-child {
-    height: 71px;
-    width: 164px;
-    position: relative;
-    border-radius: var(--br-5xs);
-    background-color: var(--color-cornflowerblue-100);
-    display: none;
-  }
-  .sign-up {
-    text-decoration: none;
-    position: relative;
-    font-size: var(--font-size-13xl);
-    font-family: var(--font-nunito);
-    color: var(--color-black);
-    text-align: left;
-    z-index: 1;
-  }
-  .content-inner,
-  .login-title-parent,
-  .rectangle-parent {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-  }
-  .rectangle-parent {
-    cursor: pointer;
-    border: 0;
-    padding: 14px 27px 13px;
-    background-color: var(--color-cornflowerblue-100);
-    border-radius: var(--br-5xs);
-    justify-content: flex-start;
-  }
-  .group-button:hover,
-  .rectangle-parent:hover {
-    background-color: var(--color-cornflowerblue-200);
-  }
-  .content-inner,
-  .login-title-parent {
-    max-width: 100%;
-  }
-  .login-title-parent {
-    flex: 1;
-    justify-content: space-between;
-    flex-shrink: 0;
-    gap: 20px;
-    text-align: left;
-    font-size: 42px;
-    color: var(--color-black);
-    font-family: var(--font-nunito);
-  }
-  .content-inner {
-    width: 1211px;
-    justify-content: flex-start;
-    padding: 0 35px var(--padding-mid);
-    box-sizing: border-box;
-  }
-  .email-address,
-  .frame-item {
-    position: relative;
-  }
-  .frame-item {
-    height: 79px;
-    width: 555px;
-    border-radius: var(--br-8xs);
-    border: 2px solid var(--color-black);
-    box-sizing: border-box;
-    display: none;
-    max-width: 100%;
-  }
-  .enter-your-email {
-    width: 246px;
-    border: 0;
-    outline: 0;
-    font-family: var(--font-inter);
-    font-size: var(--font-size-13xl);
-    background-color: transparent;
-    position: relative;
-    color: var(--color-gray);
-    text-align: left;
-    display: inline-block;
-    padding: 0;
-    z-index: 1;
-  }
-  .rectangle-group {
-    border-radius: var(--br-8xs);
-    border: 2px solid var(--color-black);
-    box-sizing: border-box;
-    flex-direction: row;
-    padding: var(--padding-mid) var(--padding-13xl);
-  }
-  .input-fields,
-  .inputs,
-  .rectangle-group {
-    align-self: stretch;
-    flex: 1;
-    display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
-    max-width: 100%;
-  }
-  .inputs {
-    flex-direction: row;
-    padding: 0 0 0 var(--padding-12xs);
-    box-sizing: border-box;
-  }
-  .input-fields {
-    flex-direction: column;
-    gap: var(--gap-9xs);
-  }
-  .frame-inner,
-  .password {
-    position: relative;
-  }
-  .frame-inner {
-    height: 79px;
-    width: 555px;
-    border-radius: var(--br-8xs);
-    border: 2px solid var(--color-black);
-    box-sizing: border-box;
-    display: none;
-    max-width: 100%;
-  }
-  .enter-your-password {
-    width: 314px;
-    border: 0;
-    outline: 0;
-    font-family: var(--font-inter);
-    font-size: var(--font-size-13xl);
-    background-color: transparent;
-    position: relative;
-    color: var(--color-gray);
-    text-align: left;
-    display: inline-block;
-    padding: 0;
-    z-index: 1;
-  }
-  .rectangle-container {
-    flex: 1;
-    border-radius: var(--br-8xs);
-    border: 2px solid var(--color-black);
-    box-sizing: border-box;
-    flex-direction: row;
-    padding: var(--padding-mid) var(--padding-13xl);
-  }
-  .input-fields-inner,
-  .input-fields1,
-  .rectangle-container {
-    align-self: stretch;
-    display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
-    max-width: 100%;
-  }
-  .input-fields-inner {
-    flex: 1;
-    flex-direction: row;
-    padding: 0 0 0 var(--padding-12xs);
-    box-sizing: border-box;
-  }
-  .input-fields1 {
-    height: 129px;
-    flex-direction: column;
-    gap: var(--gap-9xs);
-  }
-  .forgot-password1 {
-    position: relative;
-    text-decoration: underline;
-  }
-  .forgot-password,
-  .login-form {
-    display: flex;
-    align-items: flex-start;
-  }
-  .forgot-password {
-    align-self: stretch;
-    flex-direction: row;
-    justify-content: flex-end;
-  }
-  .login-form {
-    width: 578px;
-    height: 362px;
-    flex-direction: column;
-    justify-content: flex-start;
-    padding: 0 var(--padding-xl) 0 0;
-    box-sizing: border-box;
-    gap: 29px;
-    flex-shrink: 0;
-    max-width: 100%;
-  }
-  .rectangle-div {
-    height: 79px;
-    width: 555px;
-    position: relative;
-    border-radius: var(--br-5xs);
-    background-color: var(--color-cornflowerblue-100);
-    display: none;
-    max-width: 100%;
-  }
-  .log-in {
-    position: relative;
-    font-size: var(--font-size-15xl);
-    font-family: var(--font-nunito);
-    color: var(--color-black);
-    text-align: left;
-    display: inline-block;
-    min-width: 95px;
-    z-index: 1;
-  }
-  .group-button {
-    cursor: pointer;
-    padding: 14px 32px;
-    background-color: var(--color-cornflowerblue-100);
-    border-radius: var(--br-5xs);
-    text-align: center;
-    width: 100%;
-  }
-  .google-btn {
-    background-color: #4285f4; /* Google blue color */
-    color: white;
-    text-decoration: none;
-  }
-  .google-btn:hover {
-    background-color: #357ae8;
-  }
-  .group-button:hover,
-  .rectangle-parent:hover {
-    background-color: var(--color-cornflowerblue-200);
-  }
-  .google-login {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-  }
-  .login-button-icon-child {
-    align-self: stretch;
-    height: 660px;
-    position: relative;
-    filter: blur(300px);
-    border-radius: 50%;
-    background-color: #b074ff;
-  }
-  .login-button-icon {
-    flex: 1;
-    flex-direction: column;
-    padding: 51px 0 0;
-    box-sizing: border-box;
-    min-width: 750px;
-    max-width: 100%;
-  }
-  .content,
-  .frame-parent,
-  .login-button-icon,
-  .login-page-hifi {
-    display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
-  }
-  .frame-parent {
-    width: 1905px;
-    flex-direction: row;
-    gap: 196px;
-    flex-shrink: 0;
-    max-width: 154%;
-  }
-  .content,
-  .login-page-hifi {
-    box-sizing: border-box;
-  }
-  .content {
-    height: 1011px;
-    flex-direction: column;
-    padding: 0 0 440px;
-    gap: 105px;
-    flex-shrink: 0;
-    max-width: 100%;
-    text-align: left;
-    font-size: var(--font-size-15xl);
-    color: var(--color-black);
-    font-family: var(--font-nunito);
-  }
-  .login-page-hifi {
-    width: 100%;
-    position: relative;
-    background-color: #fff;
-    overflow: hidden;
-    flex-direction: row;
-    padding: 69px 0 0 681px;
-    gap: 232px;
-    line-height: normal;
-    letter-spacing: normal;
-  }
-  .button-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;  /* Space between the two buttons */
-  }
-  @media screen and (max-width: 1875px) {
-    .login-page-hifi-child {
-      flex: 1;
-      min-width: 100%;
-    }
-    .login-button-icon {
-      min-width: 100%;
-    }
-    .frame-parent {
-      flex-wrap: wrap;
-    }
-    .content {
-      flex: 1;
-      height: auto;
-      min-width: 100%;
-    }
-  }
-  @media screen and (max-width: 1400px) {
-    .frame-parent {
-      gap: 98px;
-    }
-    .content {
-      padding-bottom: 286px;
-      box-sizing: border-box;
-      min-width: 100%;
-    }
-    .login-page-hifi {
-      gap: 116px;
-      flex-wrap: wrap;
-      padding-left: var(--padding-xl);
-      padding-right: var(--padding-xl);
-      box-sizing: border-box;
-    }
-  }
-  @media screen and (max-width: 950px) {
-    .login-title-parent {
-      display: none;
-    }
-    .content-inner {
-      width: 70px;
-    }
-    .email-address {
-      font-size: var(--font-size-8xl);
-    }
-    .enter-your-email {
-      font-size: var(--font-size-7xl);
-    }
-    .password {
-      font-size: var(--font-size-8xl);
-    }
-    .enter-your-password {
-      font-size: var(--font-size-7xl);
-    }
-    .forgot-password1,
-    .log-in {
-      font-size: var(--font-size-8xl);
-    }
-    .login-button-icon {
-      padding-top: 33px;
-      box-sizing: border-box;
-    }
-    .frame-parent {
-      gap: 49px;
-    }
-    .content {
-      gap: 52px;
-      padding-bottom: 186px;
-      box-sizing: border-box;
-      min-width: 100%;
-    }
-    .login-page-hifi {
-      gap: 58px;
-    }
-  }
-  @media screen and (max-width: 450px) {
-    .email-address {
-      font-size: var(--font-size-xl);
-    }
-    .enter-your-email {
-      font-size: var(--font-size-lgi);
-    }
-    .password {
-      font-size: var(--font-size-xl);
-    }
-    .enter-your-password {
-      font-size: var(--font-size-lgi);
-    }
-    .forgot-password1,
-    .log-in {
-      font-size: var(--font-size-xl);
-    }
-    .group-button {
-      padding-left: var(--padding-xl);
-      padding-right: var(--padding-xl);
-      box-sizing: border-box;
-    }
-    .content {
-      gap: 26px;
-      min-width: 100%;
-    }
-  }
-  
-  body {
-    margin: 0;
-    line-height: normal;
-  }
-  
-  :root {
-    /* fonts */
-    --font-nunito: Nunito;
-    --font-inter: Inter;
-  
-    /* font sizes */
-    --font-size-15xl: 34px;
-    --font-size-xl: 20px;
-    --font-size-8xl: 27px;
-    --font-size-13xl: 32px;
-    --font-size-lgi: 19px;
-    --font-size-7xl: 26px;
-  
-    /* Colors */
-    --color-cornflowerblue-100: #a6bbff;
-    --color-cornflowerblue-200: #7387cc;
-    --color-black: #000;
-    --color-gray: #818181;
-  
-    /* Gaps */
-    --gap-9xs: 4px;
-  
-    /* Paddings */
-    --padding-xl: 20px;
-    --padding-mid: 17px;
-    --padding-12xs: 1px;
-    --padding-13xl: 32px;
-  
-    /* Border radiuses */
-    --br-5xs: 8px;
-    --br-8xs: 5px;
-  }
+      /* General Styles */
+      body {
+        font-family: 'Nunito', sans-serif;
+        background: linear-gradient(135deg, #b3c6ff, #f3e6ff);
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        color: #333;
+      }
+      .login-container {
+        background: #fff;
+        padding: 40px;
+        width: 90%;
+        max-width: 400px;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        text-align: center;
+      }
+      .login-container h1 {
+        font-size: 26px;
+        font-weight: 600;
+        color: #4a4a4a;
+        margin-bottom: 20px;
+      }
+      .login-container p {
+        font-size: 16px;
+        color: #6a6a6a;
+        margin-bottom: 30px;
+      }
+      .login-container p a {
+        color: #5c6bc0;
+        text-decoration: none;
+        font-weight: 600;
+      }
+      .login-container p a:hover {
+        text-decoration: underline;
+      }
+      .login-container input,
+      .login-container button,
+      .login-container .google-btn {
+        width: 100%; /* Ensures all elements are the same width */
+        box-sizing: border-box;
+      }
+      .login-container input {
+        padding: 12px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 16px;
+        color: #333;
+      }
+      .login-container input::placeholder {
+        color: #bbb;
+      }
+      .button-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Center-aligns the buttons */
+        gap: 10px;
+        width: 100%; /* Makes the container take up full width */
+      }
+      .login-container button,
+      .login-container .google-btn {
+        width: 100%; /* Makes buttons take full width of the container */
+        max-width: 350px; /* Optional, can limit button width if needed */
+        padding: 14px;
+        background-color: #5c6bc0;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        font-size: 18px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.3s ease;
+        text-align: center;
+      }
+      .login-container button:hover {
+        background-color: #3f51b5;
+      }
+      .login-container .google-btn {
+        background-color: #4285f4;
+        text-decoration: none;
+      }
+      .login-container .google-btn:hover {
+        background-color: #357ae8;
+      }
+      .forgot-password {
+        margin-top: 20px;
+        font-size: 14px;
+      }
+      .forgot-password a {
+        color: #5c6bc0;
+        text-decoration: none;
+        font-weight: 600;
+      }
+      .forgot-password a:hover {
+        text-decoration: underline;
+      }
     </style>
   </head>
   <body>
-    <div class="login-page-hifi">
-      <section class="login-page-hifi-child"></section>
-      <section class="content">
-        <div class="content-inner">
-          <header class="login-title-parent">
-            <div class="login-title">
-              <div class="log-in-to">Log in to Wear and Share</div>
-            </div>
-            <button class="rectangle-parent">
-              <div class="frame-child"></div>
-              <a class="sign-up">Sign up</a>
-            </button>
-          </header>
+    <div class="login-container">
+      <h1>Log in to Wear and Share</h1>
+      <p>Don't have an account? <a href="{% url 'signup' %}">Sign up</a></p>
+      <form action="" method="POST">
+        {% csrf_token %}
+        <input type="email" name="email" placeholder="Enter your email" required />
+        <input type="password" name="password" placeholder="Enter your password" required />
+        
+        <div class="button-container">
+          <button type="submit">Log in</button>
+          <a href="{% provider_login_url 'google' %}" class="google-btn">Log in with Google</a>
         </div>
-        <form action="" method="POST">{% csrf_token %}
-          <div class="login-form">
-            <!-- Email and Password Fields -->
-            <div class="input-fields">
-              <div class="email-address">Email address</div>
-              <div class="inputs">
-                <div class="rectangle-group">
-                  <input
-                    class="enter-your-email"
-                    placeholder="Enter your email"
-                    type="text"
-                    name="email"
-                  />
-                </div>
-              </div>
-            </div>
-            <div class="input-fields1">
-              <div class="password">Password</div>
-              <div class="input-fields-inner">
-                <div class="rectangle-container">
-                  <input
-                    class="enter-your-password"
-                    placeholder="Enter your password"
-                    type="password"
-                  />
-                </div>
-              </div>
-            </div>
-            <div class="forgot-password">
-              <div class="forgot-password1">Forgot password?</div>
-            </div>
-          </div>
-
-          <!-- Main Log In Button -->
-          <div class="button-container">
-            <button class="group-button">
-              <div class="log-in">Log in</div>
-            </button>
-
-            <!-- Google Login Button directly below -->
-            <a href="{% provider_login_url 'google' %}" class="group-button google-btn">
-              <div class="log-in">Log in with Google</div>
-            </a>
-          </div>
-        </form>
-      </section>
+        
+        <div class="forgot-password">
+          <a href="#">Forgot password?</a>
+        </div>
+      </form>
     </div>
   </body>
 </html>
