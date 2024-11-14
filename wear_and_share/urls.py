@@ -18,7 +18,9 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),  # Include allauth URLs
     path('', include('accounts.urls')),  # Include your app's URLs
+    path('admin/', admin.site.urls),
+    path('', accounts_views.home, name='home'),    # Home page at the root URL
+    path('signup.html', accounts_views.signup, name='signup')
 ]
