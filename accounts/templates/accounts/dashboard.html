@@ -1,3 +1,4 @@
+{% load socialaccount %}
 <!DOCTYPE html>
 <html>
   <head>
@@ -841,16 +842,29 @@
   }
   .group-button {
     cursor: pointer;
-    border: 0;
-    padding: var(--padding-mid) 229px 16px 232px;
+    padding: 14px 32px;
     background-color: var(--color-cornflowerblue-100);
     border-radius: var(--br-5xs);
+    text-align: center;
+    width: 100%;
+  }
+  .google-btn {
+    background-color: #4285f4; /* Google blue color */
+    color: white;
+    text-decoration: none;
+  }
+  .google-btn:hover {
+    background-color: #357ae8;
+  }
+  .group-button:hover,
+  .rectangle-parent:hover {
+    background-color: var(--color-cornflowerblue-200);
+  }
+  .google-login {
     display: flex;
-    flex-direction: row;
-    align-items: flex-start;
+    align-items: center;
     justify-content: center;
-    box-sizing: border-box;
-    max-width: 100%;
+    width: 100%;
   }
   .login-button-icon-child {
     align-self: stretch;
@@ -909,6 +923,12 @@
     gap: 232px;
     line-height: normal;
     letter-spacing: normal;
+  }
+  .button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;  /* Space between the two buttons */
   }
   @media screen and (max-width: 1875px) {
     .login-page-hifi-child {
@@ -1068,11 +1088,11 @@
         </div>
         <form action="" method="POST">{% csrf_token %}
           <div class="login-form">
+            <!-- Email and Password Fields -->
             <div class="input-fields">
               <div class="email-address">Email address</div>
               <div class="inputs">
                 <div class="rectangle-group">
-                  <div class="frame-item"></div>
                   <input
                     class="enter-your-email"
                     placeholder="Enter your email"
@@ -1086,11 +1106,10 @@
               <div class="password">Password</div>
               <div class="input-fields-inner">
                 <div class="rectangle-container">
-                  <div class="frame-inner"></div>
                   <input
                     class="enter-your-password"
                     placeholder="Enter your password"
-                    type="text"
+                    type="password"
                   />
                 </div>
               </div>
@@ -1099,17 +1118,20 @@
               <div class="forgot-password1">Forgot password?</div>
             </div>
           </div>
-          <div class="frame-parent">
+
+          <!-- Main Log In Button -->
+          <div class="button-container">
             <button class="group-button">
-              <div class="rectangle-div"></div>
               <div class="log-in">Log in</div>
             </button>
-            <div class="login-button-icon">
-              <div class="login-button-icon-child"></div>
-            </div>
+
+            <!-- Google Login Button directly below -->
+            <a href="{% provider_login_url 'google' %}" class="group-button google-btn">
+              <div class="log-in">Log in with Google</div>
+            </a>
           </div>
         </form>
       </section>
     </div>
   </body>
-</html> -->
+</html>
