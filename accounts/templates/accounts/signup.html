@@ -120,6 +120,25 @@
       .login-link:hover {
         text-decoration: underline;
       }
+      
+      /* Flash message styling */
+      .alert {
+          padding: 10px;
+          margin-bottom: 15px;
+          border: 1px solid transparent;
+          border-radius: 5px;
+          text-align: left;
+      }
+      .alert.success {
+          color: #155724;
+          background-color: #d4edda;
+          border-color: #c3e6cb;
+      }
+      .alert.error {
+          color: #721c24;
+          background-color: #f8d7da;
+          border-color: #f5c6cb;
+      }
     </style>
   </head>
   
@@ -132,18 +151,52 @@
       <!-- Log-in link for users who already have an account -->
       <p>Already have an account? <a href="{% url 'dashboard' %}" class="login-link">Log in</a></p>
       
+      <!-- Flash messages to provide feedback after form submission -->
+      {%  if messages %}
+        <div>
+          {% for message in messages %}
+            <!-- Each message is styled based on its type (success or error) -->
+            <div class="alert {{ message.tags }}">{{ message }}</div>
+          {%  endfor %}  
+        </div>
+      {% endif %}
+    
       <!-- Sign-up form -->
-      <form action="" method="POST">
+      <form action="{% url 'signup' %}" method="POST">
         {% csrf_token %}
-        
-        <!-- Email input field -->
+
+        <!-- Display validation errors for the form -->
+        {% if errors %}
+          <ul style="color: red; text-align: left;">
+            <!-- Loop through errors for each field and display them -->
+            {% for field, field_errors in errors.items %}
+              <li><strong>{{ field }}:</strong> {{ field_errors|join:", " }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+
+        <!-- Individual validation error messages for each field -->
+
+        <!-- Email input field with validation error display -->
         <input type="email" name="email" placeholder="Enter your email" required />
-        
-        <!-- Username input field -->
+        {% if errors.email %}
+          <!-- Display email-specific errors -->
+          <div style="color: red; text-align: left;">{{ errors.email|join:", " }}</div>
+        {% endif %}
+
+        <!-- Username input field with validation error display -->
         <input type="text" name="username" placeholder="Create a username" required />
-        
-        <!-- Password input field -->
+        {% if errors.username %}
+          <!-- Display username-specific errors -->
+          <div style="color: red; text-align: left;">{{ errors.username|join:", " }}</div>
+        {% endif %}
+
+        <!-- Password input field with validation error display -->
         <input type="password" name="password" placeholder="Create a password" required />
+        {% if errors.password %}
+          <!-- Display password-specific errors -->
+          <div style="color: red; text-align: left;">{{ errors.password|join:", " }}</div>
+        {% endif %}
         
         <!-- Submit button for the sign-up form -->
         <button type="submit">Sign Up</button>

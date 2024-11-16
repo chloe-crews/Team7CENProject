@@ -28,6 +28,27 @@
         min-height: 100vh;
         color: #333;
       }
+      .alert {
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid transparent;
+        border-radius: 5px;
+        text-align: left;
+      }
+      .alert.success{
+        color: #155724;
+        background-color: #d4edda;
+        border-color: #c3e6cb;
+      }
+      .alert.error {
+        color: #721c24;
+        background-color: #f8d7da;
+        border-color: #f5c6cb;
+      }
+      h1 {
+        font-size: 26px;
+        color: #4a4a4a;
+      }
       
       /* Container for the login form */
       .login-container {
@@ -161,7 +182,19 @@
       
       <!-- Sign-up link for users who don't have an account -->
       <p>Don't have an account? <a href="{% url 'signup' %}">Sign up</a></p>
-      
+
+      <!-- Flash messages to display success or error notifications -->
+      <div>
+        {% if messages %}
+          <div>
+            {% for message in messages %}
+              <!-- Display each message with appropriate styles based on its type (success or error) -->
+              <div class="alert {{ message.tags }}">{{ message }}</div>
+              {% endfor %}
+          </div>
+        {% endif %}   
+      </div>
+
       <!-- Login form -->
       <form action="" method="POST">
         {% csrf_token %}
