@@ -163,7 +163,7 @@
       <p>Don't have an account? <a href="{% url 'signup' %}">Sign up</a></p>
       
       <!-- Login form -->
-      <form action="" method="POST">
+      <form action="{% url 'login' %}" method="POST">
         {% csrf_token %}
         
         <!-- Email input field -->
