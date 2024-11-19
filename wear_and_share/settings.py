@@ -66,8 +66,15 @@ SOCIALACCOUNT_PROVIDERS = {
 }
 
 SITE_ID = 1
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = 'costume_list'
 LOGOUT_REDIRECT_URL = '/'
+LOGIN_URL = 'login'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / "media"
+LOGOUT_REDIRECT_URL = '/login/'  # Redirect after logout
+LOGIN_URL = '/login/'  # Redirect unauthenticated users to login page
+
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -152,7 +159,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [BASE_DIR / "static"]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
