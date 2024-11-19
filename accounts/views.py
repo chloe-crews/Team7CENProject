@@ -67,11 +67,79 @@ class DeleteUserView(APIView):
         user = get_object_or_404(CustomUser, id=user_id)
         user.delete()
         return Response({"message": "User deleted successfully"}, status=status.HTTP_204_NO_CONTENT)
-    
+
+@login_required
 def user_profile(request, username):
     user = get_object_or_404(CustomUser, username=username)
-    costumes = user.costumes.all().order_by('-date_listed')  # Explicitly order the costumes
-    paginator = Paginator(costumes, 5)  # Show 5 costumes per page
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
-    return render(request, 'accounts/user_profile.html', {'user': user, 'costumes': page_obj})
+
+    if request.method == 'POST':
+        display_name = request.POST.get('display_name')
+        profile_picture = request.FILES.get('profile_picture')
+
+        if display_name:
+            user.display_name = display_name
+        if profile_picture:
+            user.profile_picture = profile_picture
+
+        user.save()
+        messages.success(request, 'Profile updated successfully!')
+        return redirect('user_profile', username=user.username)
+
+    # Corrected to use the related_name
+    costumes = user.costumes.all()
+    return render(request, 'accounts/user_profile.html', {'user': user, 'costumes': costumes})
+
+
+@login_required
+def add_listing(request):
+    if request.method == 'POST':
+        title = request.POST['title']
+        description = request.POST['description']
+        price_per_day = request.POST['price_per_day']
+        size = request.POST['size']
+        category = request.POST['category']
+
+        # Save the new listing
+        Costume.objects.create(
+            owner=request.user,
+            title=title,
+            description=description,
+            price_per_day=price_per_day,
+            size=size,
+            category=category
+        )
+        return redirect('user_profile', username=request.user.username)
+
+    return render(request, 'accounts/add_listing.html')
+
+@login_required
+def update_profile_picture(request):
+    if request.method == 'POST' and request.FILES.get('profile_picture'):
+        profile_picture = request.FILES['profile_picture']
+        user = request.user
+        user.profile_picture = profile_picture
+        user.save()
+        messages.success(request, 'Profile picture updated successfully!')
+        return redirect('user_profile', username=user.username)
+
+    return render(request, 'accounts/update_profile_picture.html')
+
+@login_required
+def update_profile(request, username):
+    user = get_object_or_404(CustomUser, username=username)
+
+    if request.method == 'POST':
+        display_name = request.POST.get('display_name')
+        profile_picture = request.FILES.get('profile_picture')
+
+        if display_name:
+            user.display_name = display_name
+        if profile_picture:
+            user.profile_picture = profile_picture
+        user.save()
+        messages.success(request, 'Your profile has been updated!')
+        return redirect('user_profile', username=user.username)
+
+    return render(request, 'accounts/update_profile.html', {
+        'user': user,
+    })
