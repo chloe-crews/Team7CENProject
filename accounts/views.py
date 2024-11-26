@@ -9,6 +9,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializers import CustomUserSerializer
 from .models import CustomUser, Costume
+from .forms import CostumeForm
 
 def home(request):
     if request.method == 'POST':
@@ -143,3 +144,23 @@ def update_profile(request, username):
     return render(request, 'accounts/update_profile.html', {
         'user': user,
     })
+
+def costume_detail(request, pk):
+    costume = get_object_or_404(Costume, pk=pk)
+    return render(request, 'accounts/costumes/costume_detail.html', {'costume': costume})
+
+def edit_costume(request, pk):
+    costume = get_object_or_404(Costume, pk=pk)
+
+    if request.user != costume.owner:
+        return redirect('costume_list')
+
+    if request.method == 'POST':
+        form = CostumeForm(request.POST, request.FILES, instance=costume)
+        if form.is_valid():
+            form.save()
+            return redirect('costume_detail', pk=costume.pk)
+    else:
+        form = CostumeForm(instance=costume)
+
+    return render(request, 'accounts/costumes/edit_costume.html', {'form': form})

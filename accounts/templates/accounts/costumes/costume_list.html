@@ -27,7 +27,6 @@
             padding: 10px 20px;
         }
 
-        /* Centered title in the navigation bar */
         .navbar-title {
             margin: 0 auto;
             font-size: 24px;
@@ -49,7 +48,7 @@
         }
 
         .logout-link {
-            background-color: #e57373; /* Logout button color */
+            background-color: #e57373;
         }
 
         .logout-link:hover {
@@ -57,7 +56,7 @@
         }
 
         .profile-link {
-            background-color: #3f51b5; /* Profile button color */
+            background-color: #3f51b5;
         }
 
         .profile-link:hover {
@@ -80,14 +79,32 @@
         ul {
             list-style: none;
             padding: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
         }
 
         li {
             margin-bottom: 20px;
-            padding: 20px;
+            padding: 10px;
             background: white;
             border-radius: 8px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .costume-image {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .costume-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 5px;
         }
 
         .empty-message {
@@ -121,16 +138,16 @@
         <ul>
             {% for costume in costumes %}
                 <li>
-                    <h2>{{ costume.title }}</h2>
-                    <p>{{ costume.description }}</p>
-                    <p>Price per day: ${{ costume.price_per_day }}</p>
-                    <p>Size: {{ costume.size }}</p>
-                    <p>
-                        Listed by: 
-                        <a href="{% url 'user_profile' costume.owner.username %}">
-                            {{ costume.owner.username }}
+                    <!-- Clickable image -->
+                    {% if costume.image %}
+                        <a href="{% url 'costume_detail' costume.id %}">
+                            <img src="{{ costume.image.url }}" alt="Image of {{ costume.title }}" class="costume-image">
                         </a>
-                    </p>
+                    {% endif %}
+                    <div class="costume-title">{{ costume.title }}</div>
+                    <p>${{ costume.price_per_day }} / day</p>
+                    <p>{{ costume.size }}</p>
+                    <a href="{% url 'user_profile' costume.owner.username %}">{{ costume.owner.username }}</a>
                 </li>
             {% empty %}
                 <p class="empty-message">No costumes available at the moment.</p>
