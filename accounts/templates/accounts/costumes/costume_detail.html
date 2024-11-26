@@ -1,0 +1,99 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ costume.title }}</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(135deg, #b3c6ff, #f3e6ff);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background: white;
+            border-radius: 12px;
+            padding: 15px;
+            max-width: 600px;
+            width: 90%;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        img {
+            width: 90%;
+            height: auto;
+            border-radius: 12px;
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+
+        p {
+            margin: 8px 0;
+            font-size: 14px;
+        }
+
+        .button-container {
+            margin-top: 15px;
+        }
+
+        a.button {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #5c6bc0;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 14px;
+            margin-right: 10px;
+        }
+
+        a.button:hover {
+            background-color: #3f51b5;
+        }
+
+        a.contact-lister {
+            background-color: #4caf50; /* Green for contact button */
+        }
+
+        a.contact-lister:hover {
+            background-color: #388e3c;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>{{ costume.title }}</h1>
+        <img src="{{ costume.image.url }}" alt="{{ costume.title }}">
+        <p><strong>Description:</strong> {{ costume.description }}</p>
+        <p><strong>Price per day:</strong> ${{ costume.price_per_day }}</p>
+        <p><strong>Size:</strong> {{ costume.size }}</p>
+        <p><strong>Category:</strong> {{ costume.category }}</p>
+        <p><strong>Listed by:</strong> {{ costume.owner.username }}</p>
+
+        <div class="button-container">
+            <!-- Back to Listings Button -->
+            <a href="{% url 'costume_list' %}" class="button">Back to listings</a>
+
+            <!-- Contact Lister Button -->
+            <a href="mailto:{{ costume.owner.email }}?subject=Inquiry about {{ costume.title }}" 
+               class="button contact-lister">
+                Contact Lister
+            </a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
+
 # Custom user manager
 class CustomUserManager(BaseUserManager):
     def create_user(self, email, username, password=None, **extra_fields):
@@ -25,6 +26,7 @@ class CustomUserManager(BaseUserManager):
             raise ValueError('Superuser must have is_superuser=True.')
 
         return self.create_user(email, username, password, **extra_fields)
+
 
 # Custom user model
 class CustomUser(AbstractBaseUser):
@@ -56,6 +58,7 @@ class CustomUser(AbstractBaseUser):
     def has_module_perms(self, app_label):
         return self.is_superuser
 
+
 # Costume model
 class Costume(models.Model):
     owner = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='costumes')
@@ -66,6 +69,7 @@ class Costume(models.Model):
     category = models.CharField(max_length=30)
     available = models.BooleanField(default=True)
     date_listed = models.DateTimeField(auto_now_add=True)
+    image = models.ImageField(upload_to='costume_images/', blank=True, null=True)  # Added image field
 
     def __str__(self):
         return self.title

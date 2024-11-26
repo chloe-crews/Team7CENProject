@@ -143,3 +143,7 @@ def update_profile(request, username):
     return render(request, 'accounts/update_profile.html', {
         'user': user,
     })
+
+def costume_detail(request, pk):
+    costume = get_object_or_404(Costume, pk=pk)
+    return render(request, 'accounts/costumes/costume_detail.html', {'costume': costume})

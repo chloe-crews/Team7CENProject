@@ -7,8 +7,9 @@ from . import views
 urlpatterns = [
     path('', views.costume_list, name='home'),  # Redirect '/' to costume list if desired
     path('signup/', views.signup, name='signup'),
-    path('login/', views.home, name='login'),
+    path('login/', auth_views.LoginView.as_view(template_name='accounts/login.html'), name='login'),
     path('costumes/', views.costume_list, name='costume_list'),
+    path('costumes/<int:pk>/', views.costume_detail, name='costume_detail'),  # View costume details
     path('profile/<str:username>/', views.user_profile, name='user_profile'),
     path('logout/', auth_views.LogoutView.as_view(next_page='/login/'), name='logout'),
     path('add-listing/', views.add_listing, name='add_listing'),
