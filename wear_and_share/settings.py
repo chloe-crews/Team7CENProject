@@ -69,13 +69,10 @@ SOCIALACCOUNT_PROVIDERS = {
 SITE_ID = 1
 LOGIN_REDIRECT_URL = 'costume_list'
 LOGOUT_REDIRECT_URL = '/'
-LOGIN_URL = 'login'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 LOGOUT_REDIRECT_URL = '/login/'  # Redirect after logout
 LOGIN_URL = '/login/'  # Redirect unauthenticated users to login page
-
-
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

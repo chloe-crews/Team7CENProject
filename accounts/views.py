@@ -12,19 +12,22 @@ from .models import CustomUser, Costume
 from .forms import CostumeForm
 
 def home(request):
+    print("Login view called")  # Debug log
     if request.method == 'POST':
         email = request.POST.get('email')
         password = request.POST.get('password')
+        print(f"Email: {email}, Password: {password}")  # Debug input
 
-        # Authenticate user
         user = authenticate(request, username=email, password=password)
         if user is not None:
-            login(request, user)  # Log the user in
-            return redirect('costume_list')  # Redirect to the costume list page
+            print("Login successful")  # Debug success
+            login(request, user)
+            return redirect('costume_list')
         else:
-            messages.error(request, 'Invalid email or password.')  # Show error if authentication fails
+            print("Login failed")  # Debug failure
+            messages.error(request, 'Invalid email or password.')
 
-    return render(request, 'accounts/login.html')  # Render the login page for GET requests
+    return render(request, 'accounts/login.html')
 
 def signup(request):
     if request.method == 'POST':
@@ -52,7 +55,7 @@ def signup(request):
 
 @login_required
 def costume_list(request):
-    costumes = Costume.objects.filter(available=True).order_by('-date_listed')  # Fetch available costumes
+    costumes = Costume.objects.filter(available=True).order_by('-date_listed')
     return render(request, 'accounts/costumes/costume_list.html', {'costumes': costumes})
 
 class CreateUserView(APIView):
