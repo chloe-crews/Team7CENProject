@@ -120,6 +120,25 @@
       .login-link:hover {
         text-decoration: underline;
       }
+
+      /* Styles for messages */
+      .messages ul {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 20px;
+      }
+      .messages li {
+        padding: 10px;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        color: white;
+      }
+      .messages .error {
+        background-color: #ff5f5f; /* Red for error messages */
+      }
+      .messages .success {
+        background-color: #5cb85c; /* Green for success messages */
+      }
     </style>
   </head>
   
@@ -129,8 +148,19 @@
       <!-- Page title inside the form container -->
       <h1>Sign up for Wear and Share</h1>
       
+      <!-- Messages for user feedback -->
+      <div class="messages">
+        {% if messages %}
+          <ul>
+            {% for message in messages %}
+              <li class="{{ message.tags }}">{{ message }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </div>
+      
       <!-- Log-in link for users who already have an account -->
-      <p>Already have an account? <a href="{% url 'dashboard' %}" class="login-link">Log in</a></p>
+      <p>Already have an account? <a href="{% url 'login' %}" class="login-link">Log in</a></p>
       
       <!-- Sign-up form -->
       <form action="" method="POST">

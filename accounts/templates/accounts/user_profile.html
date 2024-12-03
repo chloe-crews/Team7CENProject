@@ -1,0 +1,159 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ user.username }}'s Profile</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <style>
+        /* General page styles */
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(135deg, #f3e6ff, #b3c6ff);
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            background: #fff;
+            padding: 40px;
+            max-width: 600px;
+            width: 90%;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        img {
+            max-width: 150px;
+            border-radius: 50%;
+            margin-bottom: 15px;
+        }
+
+        p {
+            font-size: 16px;
+            margin: 10px 0;
+        }
+
+        h2 {
+            margin-top: 30px;
+            font-size: 22px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 20px;
+            text-align: left;
+            padding: 15px;
+            background: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .back-button, .add-listing-btn, .edit-profile-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #5c6bc0;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+            transition: background 0.3s ease;
+        }
+
+        .back-button:hover, .add-listing-btn:hover, .edit-profile-btn:hover {
+            background-color: #3f51b5;
+        }
+
+        .pagination {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .pagination a {
+            text-decoration: none;
+            color: #5c6bc0;
+            font-weight: bold;
+        }
+
+        .pagination a:hover {
+            text-decoration: underline;
+        }
+
+        .pagination span {
+            font-size: 14px;
+            color: #6a6a6a;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- User profile header -->
+        <h1>{{ user.username }}</h1>
+        {% if user.profile_picture %}
+            <img src="{{ user.profile_picture.url }}" alt="{{ user.username }}'s Profile Picture">
+        {% else %}
+            <img src="{% static 'profile_pics/no_user_pfp.jpeg' %}" alt="Default Profile Picture">
+        {% endif %}
+        {% if user.display_name %}
+            <p>Display Name: {{ user.display_name }}</p>
+        {% else %}
+            <p>Display Name: Not Set</p>
+        {% endif %}
+        <p>Contact: <a href="mailto:{{ user.email }}">{{ user.email }}</a></p>
+
+        <!-- Edit Profile Button -->
+        <a href="{% url 'update_profile' user.username %}" class="edit-profile-btn">Edit Profile</a>
+
+        <!-- Add a New Listing button -->
+        <a href="{% url 'add_listing' %}" class="add-listing-btn">Add a New Listing</a>
+
+        <!-- Listed costumes -->
+        <h2>Listed Costumes</h2>
+        <ul>
+            {% for costume in costumes %}
+                <li>
+                    <h3>{{ costume.title }}</h3>
+                    <p>{{ costume.description }}</p>
+                    <p>Price per day: ${{ costume.price_per_day }}</p>
+                    <p>Size: {{ costume.size }}</p>
+                </li>
+            {% empty %}
+                <p>No costumes listed by this user.</p>
+            {% endfor %}
+        </ul>
+
+        <!-- Pagination -->
+        <div class="pagination">
+            {% if costumes.has_previous %}
+                <a href="?page={{ costumes.previous_page_number }}">Previous</a>
+            {% endif %}
+            <span>Page {{ costumes.number }} of {{ costumes.paginator.num_pages }}</span>
+            {% if costumes.has_next %}
+                <a href="?page={{ costumes.next_page_number }}">Next</a>
+            {% endif %}
+        </div>
+
+        <!-- Back to costume listings button -->
+        <a href="{% url 'costume_list' %}" class="back-button">Back to Costume Listings</a>
+    </div>
+</body>
+</html>
