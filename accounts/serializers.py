@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import CustomUser
+from .models import CustomUser, Costume
 
 
 class CustomUserSerializer(serializers.ModelSerializer):
@@ -17,3 +17,10 @@ class CustomUserSerializer(serializers.ModelSerializer):
             password=validated_data['password']
         )
         return user
+
+
+class CostumeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Costume
+        fields = ['id', 'title', 'description', 'price_per_day', 'size', 'category', 'available', 'date_listed', 'owner']
+        read_only_fields = ['id', 'date_listed', 'owner']
