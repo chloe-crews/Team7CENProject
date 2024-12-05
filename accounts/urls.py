@@ -17,6 +17,9 @@ urlpatterns = [
     path('profile/<str:username>/update/', views.update_profile, name='update_profile'),
     path('costumes/<int:pk>/edit/', views.edit_costume, name='edit_costume'),
     path('costumes/<int:pk>/delete/', views.delete_costume_confirmation, name='delete_costume'),
+    path('costumes/<int:costume_id>/message/', views.send_message, name='send_message'),
+    path('messages/', views.view_messages, name='view_messages'),
+    path('inbox/', views.user_inbox, name='user_inbox'),
 ]
 
 if settings.DEBUG:  # Serve media files during development

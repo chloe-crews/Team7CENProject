@@ -47,6 +47,12 @@
             transition: background 0.3s ease;
         }
 
+        .navbar-buttons {
+            display: flex;
+            gap: 10px;
+            margin-left: auto;
+        }
+
         .logout-link {
             background-color: #e57373;
         }
@@ -61,6 +67,14 @@
 
         .profile-link:hover {
             background-color: #2c387e;
+        }
+
+        .inbox-link {
+            background-color: #4caf50;
+        }
+
+        .inbox-link:hover {
+            background-color: #388e3c;
         }
 
         /* Main container styles */
@@ -150,16 +164,17 @@
                 {% csrf_token %}
                 <button type="submit" class="logout-link">Logout</button>
             </form>
+            <div class="navbar-buttons">
+                <a href="{% url 'user_inbox' %}" class="inbox-link">Inbox</a>
+                <a href="{% url 'user_profile' user.username %}" class="profile-link">My Profile</a>
+            </div>
         {% else %}
             <a href="{% url 'login' %}" class="logout-link">Log in</a>
         {% endif %}
-
+    
         <div class="navbar-title">Costume Listings</div>
-
-        {% if user.is_authenticated %}
-            <a href="{% url 'user_profile' user.username %}" class="profile-link">My Profile</a>
-        {% endif %}
     </div>
+    
 
     <!-- Main content -->
     <div class="container">

@@ -126,9 +126,8 @@
             <a href="{% url 'costume_list' %}" class="button">Back to Listings</a>
 
             <!-- Contact Lister Button -->
-            <a href="mailto:{{ costume.owner.email }}?subject=Inquiry about {{ costume.title }}" 
-               class="button contact-button">
-                Contact Lister
+            <a href="{% url 'send_message' costume.id %}" class="button contact-button">
+                Message Lister
             </a>
 
             <!-- Edit and Delete Buttons for Owner -->

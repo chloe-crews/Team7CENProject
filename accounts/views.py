@@ -8,8 +8,8 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializers import CustomUserSerializer
-from .models import CustomUser, Costume
-from .forms import CostumeForm
+from .models import CustomUser, Costume, Message
+from .forms import CostumeForm, MessageForm
 
 def home(request):
     print("Login view called")  # Debug log
@@ -176,3 +176,41 @@ def edit_costume(request, pk):
     else:
         form = CostumeForm(instance=costume)
     return render(request, 'accounts/costumes/edit_costume.html', {'form': form, 'costume': costume})
+
+@login_required
+def send_message(request, costume_id):
+    costume = get_object_or_404(Costume, id=costume_id)
+
+    if request.method == 'POST':
+        form = MessageForm(request.POST)
+        if form.is_valid():
+            message = form.save(commit=False)
+            message.sender = request.user
+            message.recipient = costume.owner
+            message.costume = costume
+            message.save()
+            messages.success(request, "Your message has been sent!")
+            return redirect('costume_detail', pk=costume.id)  # Use 'pk' instead of 'costume_id'
+
+    form = MessageForm()
+    return render(request, 'accounts/costumes/send_message.html', {'form': form, 'costume': costume})
+
+@login_required
+def view_messages(request):
+    messages = Message.objects.filter(receiver=request.user).order_by('-timestamp')
+    return render(request, 'accounts/user_inbox.html', {'messages': messages})
+
+@login_required
+def user_inbox(request):
+    # Fetch messages where the logged-in user is the recipient
+    received_messages = Message.objects.filter(recipient=request.user).order_by('-timestamp')
+
+    # Fetch messages where the logged-in user is the sender
+    sent_messages = Message.objects.filter(sender=request.user).order_by('-timestamp')
+
+    return render(request, 'accounts/user_inbox.html', {
+        'received_messages': received_messages,
+        'sent_messages': sent_messages,
+    })
+
+

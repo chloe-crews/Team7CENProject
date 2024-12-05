@@ -1,0 +1,77 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Messages</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(135deg, #b3c6ff, #f3e6ff);
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #5c6bc0;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            background: #f9f9f9;
+            margin-bottom: 15px;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        li p {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+
+        a {
+            color: #5c6bc0;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Your Messages</h1>
+        <ul>
+            {% for message in messages %}
+                <li>
+                    <p><strong>From:</strong> {{ message.sender.username }}</p>
+                    <p><strong>Listing:</strong> <a href="{% url 'costume_detail' message.costume.id %}">{{ message.costume.title }}</a></p>
+                    <p><strong>Message:</strong> {{ message.content }}</p>
+                    <p><strong>Sent:</strong> {{ message.timestamp }}</p>
+                </li>
+            {% empty %}
+                <p>No messages yet.</p>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
