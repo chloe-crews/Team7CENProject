@@ -166,6 +166,7 @@
                     <div>
                         {{ form.image }}
                         <small>Upload a new image to replace the current one.</small>
+                        <div class="errorlist">{{ form.image.errors }}</div> <!-- Display image field errors -->
                     </div>
                 </div>
             </div>

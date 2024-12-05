@@ -93,7 +93,6 @@ def user_profile(request, username):
     costumes = user.costumes.all()
     return render(request, 'accounts/user_profile.html', {'user': user, 'costumes': costumes})
 
-
 @login_required
 def add_listing(request):
     if request.method == 'POST':
@@ -117,7 +116,6 @@ def add_listing(request):
         return redirect('user_profile', username=request.user.username)
 
     return render(request, 'accounts/add_listing.html')
-
 
 @login_required
 def update_profile_picture(request):
@@ -168,12 +166,13 @@ def edit_costume(request, pk):
     costume = get_object_or_404(Costume, pk=pk)
     if request.method == 'POST':
         form = CostumeForm(request.POST, request.FILES, instance=costume)
+        print(request.FILES)  # Debug: To see what file is being uploaded
         if form.is_valid():
             form.save()
             messages.success(request, 'Costume updated successfully!')
             return redirect('costume_detail', pk=costume.pk)
         else:
-            print(form.errors)  # Debug: Print form errors if any
+            print("Form errors:", form.errors)  # Debug: Print form errors if validation fails
     else:
         form = CostumeForm(instance=costume)
     return render(request, 'accounts/costumes/edit_costume.html', {'form': form, 'costume': costume})
