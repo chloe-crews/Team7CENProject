@@ -1,3 +1,5 @@
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 from django.shortcuts import render, redirect
 from django.shortcuts import get_object_or_404
 from django.contrib import messages
@@ -213,4 +215,12 @@ def user_inbox(request):
         'sent_messages': sent_messages,
     })
 
-
+@login_required
+def delete_message(request, message_id):
+    message = get_object_or_404(Message, id=message_id)
+    # Ensure only the sender or recipient can delete the message
+    if request.user == message.sender or request.user == message.recipient:
+        message.delete()
+        return HttpResponseRedirect(reverse('user_inbox'))
+    else:
+        return HttpResponseRedirect(reverse('user_inbox'))

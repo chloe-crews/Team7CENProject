@@ -20,6 +20,7 @@ urlpatterns = [
     path('costumes/<int:costume_id>/message/', views.send_message, name='send_message'),
     path('messages/', views.view_messages, name='view_messages'),
     path('inbox/', views.user_inbox, name='user_inbox'),
+    path('messages/delete/<int:message_id>/', views.delete_message, name='delete_message'),
 ]
 
 if settings.DEBUG:  # Serve media files during development
