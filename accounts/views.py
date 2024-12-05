@@ -102,6 +102,7 @@ def add_listing(request):
         price_per_day = request.POST['price_per_day']
         size = request.POST['size']
         category = request.POST['category']
+        image = request.FILES.get('image')  # Get the image from request.FILES
 
         # Save the new listing
         Costume.objects.create(
@@ -110,11 +111,13 @@ def add_listing(request):
             description=description,
             price_per_day=price_per_day,
             size=size,
-            category=category
+            category=category,
+            image=image  # Save the image field
         )
         return redirect('user_profile', username=request.user.username)
 
     return render(request, 'accounts/add_listing.html')
+
 
 @login_required
 def update_profile_picture(request):
@@ -152,18 +155,25 @@ def costume_detail(request, pk):
     costume = get_object_or_404(Costume, pk=pk)
     return render(request, 'accounts/costumes/costume_detail.html', {'costume': costume})
 
+@login_required
+def delete_costume_confirmation(request, pk):
+    costume = get_object_or_404(Costume, pk=pk)
+    if request.method == 'POST':
+        costume.delete()
+        return redirect('costume_list')
+    return render(request, 'accounts/costumes/delete_costume.html', {'costume': costume})
+
+@login_required
 def edit_costume(request, pk):
     costume = get_object_or_404(Costume, pk=pk)
-
-    if request.user != costume.owner:
-        return redirect('costume_list')
-
     if request.method == 'POST':
         form = CostumeForm(request.POST, request.FILES, instance=costume)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Costume updated successfully!')
             return redirect('costume_detail', pk=costume.pk)
+        else:
+            print(form.errors)  # Debug: Print form errors if any
     else:
         form = CostumeForm(instance=costume)
-
-    return render(request, 'accounts/costumes/edit_costume.html', {'form': form})
+    return render(request, 'accounts/costumes/edit_costume.html', {'form': form, 'costume': costume})

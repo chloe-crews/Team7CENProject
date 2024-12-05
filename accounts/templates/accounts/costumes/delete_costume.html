@@ -1,0 +1,82 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Costume</title>
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(135deg, #ffb3b3, #ffe6e6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #d32f2f;
+        }
+
+        p {
+            margin-bottom: 20px;
+        }
+
+        .actions {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .button {
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .cancel-button {
+            background-color: #ccc;
+            color: #333;
+        }
+
+        .cancel-button:hover {
+            background-color: #aaa;
+        }
+
+        .delete-button {
+            background-color: #d32f2f;
+            color: white;
+        }
+
+        .delete-button:hover {
+            background-color: #c62828;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Delete {{ costume.title }}</h1>
+        <p>Are you sure you want to delete this costume? This action cannot be undone.</p>
+        <div class="actions">
+            <a href="{% url 'costume_detail' costume.pk %}" class="button cancel-button">Cancel</a>
+            <form method="post">
+                {% csrf_token %}
+                <button type="submit" class="button delete-button">Delete</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

@@ -91,6 +91,25 @@
             border-radius: 8px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             text-align: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        li:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .costume-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
         }
 
         .costume-image {
@@ -98,13 +117,23 @@
             height: 100px;
             object-fit: cover;
             border-radius: 8px;
-            margin-bottom: 10px;
+        }
+
+        .placeholder-image {
+            width: 100px;
+            height: 100px;
+            background-color: #e0e0e0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 8px;
+            font-size: 12px;
+            color: #666;
         }
 
         .costume-title {
             font-size: 16px;
             font-weight: bold;
-            margin-bottom: 5px;
         }
 
         .empty-message {
@@ -138,16 +167,17 @@
         <ul>
             {% for costume in costumes %}
                 <li>
-                    <!-- Clickable image -->
-                    {% if costume.image %}
-                        <a href="{% url 'costume_detail' costume.id %}">
+                    <a href="{% url 'costume_detail' costume.id %}" class="costume-card">
+                        {% if costume.image %}
                             <img src="{{ costume.image.url }}" alt="Image of {{ costume.title }}" class="costume-image">
-                        </a>
-                    {% endif %}
-                    <div class="costume-title">{{ costume.title }}</div>
-                    <p>${{ costume.price_per_day }} / day</p>
-                    <p>{{ costume.size }}</p>
-                    <a href="{% url 'user_profile' costume.owner.username %}">{{ costume.owner.username }}</a>
+                        {% else %}
+                            <div class="placeholder-image">No Image</div>
+                        {% endif %}
+                        <div class="costume-title">{{ costume.title }}</div>
+                        <p>${{ costume.price_per_day }} / day</p>
+                        <p>Size: {{ costume.size }}</p>
+                        <p>Owner: {{ costume.owner.username }}</p>
+                    </a>
                 </li>
             {% empty %}
                 <p class="empty-message">No costumes available at the moment.</p>
